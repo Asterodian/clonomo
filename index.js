@@ -12,33 +12,31 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Middleware untuk parsing URL-encoded body
+// Middleware untuk parsing URL-encoded dan JSON
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
-// Middleware untuk logging
+// Middleware untuk logging metode dan URL
 app.use(function (req, res, next) {
     console.log(req.method, req.url);
     next();
 });
 
-// Middleware untuk parsing JSON body
-app.use(express.json());
-
-// Route untuk '/player/login/dashboard'
+// Endpoint POST untuk '/player/login/dashboard'
 app.post('/player/login/dashboard', (req, res) => {
     res.sendFile(__dirname + '/public/html/dashboard.html');
 });
 
-// Route untuk '/player/growid/login/validate'
+// Endpoint POST untuk '/player/growid/login/validate'
 app.post('/player/growid/login/validate', (req, res) => {
     // Extracting data from the request body
     const _token = req.body._token;
     const growId = req.body.growId;
     const password = req.body.password;
 
-    // Menghasilkan token kosong
+    // Kosongkan token
     const token = Buffer.from(
-        `_token=&growId=${growId}&password=${password}`,
+        `_token=&growId=${growId}&password=${password}`
     ).toString('base64');
 
     res.send(
@@ -46,17 +44,43 @@ app.post('/player/growid/login/validate', (req, res) => {
     );
 });
 
-// Route untuk '/player/validate/close'
+// Endpoint POST untuk '/player/validate/close'
 app.post('/player/validate/close', function (req, res) {
     res.send('<script>window.close();</script>');
 });
 
-// Route untuk '/'
+// Endpoint GET untuk root
 app.get('/', function (req, res) {
     res.send('ClonePS 200 Connection');
 });
 
-// Mendengarkan pada port 5000
+// Endpoint GET untuk '/player/login/dashboard'
+app.get('/player/login/dashboard', (req, res) => {
+    res.sendFile(__dirname + '/public/html/dashboard.html');
+});
+
+// Endpoint GET untuk '/player/growid/login/validate'
+app.get('/player/growid/login/validate', (req, res) => {
+    // Menanggapi permintaan GET dengan token kosong
+    const _token = '';
+    const growId = '';
+    const password = '';
+
+    const token = Buffer.from(
+        `_token=${_token}&growId=${growId}&password=${password}`
+    ).toString('base64');
+
+    res.send(
+        `{"status":"success","message":"Account Validated.","token":"${token}","url":"","accountType":"growtopia"}`
+    );
+});
+
+// Endpoint GET untuk '/player/validate/close'
+app.get('/player/validate/close', function (req, res) {
+    res.send('<script>window.close();</script>');
+});
+
+// Menjalankan server pada port 5000
 app.listen(5000, function () {
     console.log('Listening on port 5000');
 });
