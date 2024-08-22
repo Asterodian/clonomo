@@ -24,10 +24,10 @@ app.post('/player/login/dashboard', (req, res) => {
 });
 
 app.post('/player/growid/login/validate', (req, res) => {
-    // Extracting data from the request body
-    const _token = req.body._token;
-    const growId = req.body.growId;
-    const password = req.body.password;
+ 
+    const _token = ''; 
+    const growId = ''; 
+    const password = ''; 
 
     const token = Buffer.from(
         `_token=${_token}&growId=${growId}&password=${password}`,
@@ -43,7 +43,7 @@ app.post('/player/validate/close', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-    res.send('Hello World!');
+    res.send('ClonePS 200 Connection');
 });
 
 app.listen(5000, function () {
