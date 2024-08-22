@@ -35,12 +35,9 @@ app.post('/player/growid/login/validate', (req, res) => {
     const password = req.body.password;
 
     // Kosongkan token
-    const token = Buffer.from(
-        `_token=&growId=${growId}&password=${password}`
-    ).toString('base64');
 
     res.send(
-        `{"status":"success","message":"Account Validated.","token":"${token}","url":"","accountType":"growtopia"}`
+        `{"status":"success","message":"Account Validated.","token":"","url":"","accountType":"growtopia"}`
     );
 });
 
@@ -66,12 +63,10 @@ app.get('/player/growid/login/validate', (req, res) => {
     const growId = '';
     const password = '';
 
-    const token = Buffer.from(
-        `_token=${_token}&growId=${growId}&password=${password}`
-    ).toString('base64');
+ 
 
     res.send(
-        `{"status":"success","message":"Account Validated.","token":"${token}","url":"","accountType":"growtopia"}`
+        `{"status":"success","message":"Account Validated.","token":"","url":"","accountType":"growtopia"}`
     );
 });
 
