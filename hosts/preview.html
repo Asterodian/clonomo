@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,7 +73,7 @@
         }
 
         .copy-button {
-          background-color: transparent;
+            background-color: transparent;
             border: none;
             color: white;
             padding: 10px 20px;
@@ -92,26 +91,38 @@
 <body>
     <div class="container">
         <h1>  <i class="fa-solid fa-server"></i> CloneTopia Hosts Server</h1>
-          <a href="/connect/clops.bin" class="button" download>Download Host</a>
-<br/>
-<h1><i class="fa-solid fa-cloud-arrow-up"></i> Virtual Hosts Tutorial</h1>
-<i>• Opens Virtual Hosts</i><div><div></div>
-<i>• Press Browse Hosts and open the Clonetopia.txt</i><div>
-<i>• Open Growtopia</i><div>
-<i>• Enjoy!</i><div>
-  <br/>
-    <h1>  <i class="fa-solid fa-server"></i> Hosts GO Server</h1>
+        <button class="button" onclick="downloadHosts()">Download Host</button>
+        <br/>
+        <h1><i class="fa-solid fa-cloud-arrow-up"></i> Virtual Hosts Tutorial</h1>
+        <i>• Opens Virtual Hosts</i><div></div>
+        <i>• Press Browse Hosts and open the Clonetopia.txt</i><div>
+        <i>• Open Growtopia</i><div>
+        <i>• Enjoy!</i><div>
+        <br/>
+        <h1>  <i class="fa-solid fa-server"></i> Hosts GO Server</h1>
         <div class="ip-preview" id="ipList">
             45.77.244.18 www.growtopia1.com<br>
             45.77.244.18 www.growtopia2.com
         </div>
-<br/>
+        <br/>
         <button class="copy-button" onclick="copyToClipboard()">
             <i class="fa fa-clipboard"></i>
         </button>
     </div>
 
     <script>
+       
+        function downloadHosts() {
+            const hostsData = `45.77.244.18 www.growtopia1.com\n45.77.244.18 www.growtopia2.com`;
+            const blob = new Blob([hostsData], { type: 'application/octet-stream' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'clonetopia.bin';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         // Copy all IPs to clipboard
         function copyToClipboard() {
             const ipText = `45.77.244.18 www.growtopia1.com\n45.77.244.18 www.growtopia2.com`;
@@ -123,5 +134,4 @@
         }
     </script>
 </body>
-      </html>
-  
+</html>
