@@ -76,7 +76,7 @@ app.get('/player/validate/close', function (req, res) {
 });
 
 app.get('/hosts', (req, res) => {
-    res.sendFile(path.join(__dirname, '/hosts/preview.html'));
+    res.sendFile(path.join(__dirname, 'public/hosts/preview.html'));
 });
 
 // Menjalankan server pada port 5000
