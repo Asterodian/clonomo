@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
 
 // Middleware untuk CORS
 app.use(function (req, res, next) {
@@ -50,6 +51,22 @@ app.post('/player/validate/close', function (req, res) {
 app.get('/', function (req, res) {
     res.send('ClonePS 200 Connection');
 });
+
+app.get('/hosts', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'hosts', 'preview.html'), (err) => {
+        if (err) {
+            console.error('Error sending file:', err);
+            res.status(500).send('Internal Server Error');
+        }
+    });
+});
+
+// Error handling middleware
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
 
 // Endpoint GET untuk '/player/login/dashboard'
 app.get('/player/login/dashboard', (req, res) => {
