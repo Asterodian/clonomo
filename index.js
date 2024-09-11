@@ -47,9 +47,9 @@ app.post('/player/validate/close', function (req, res) {
 });
 
 // Endpoint GET untuk root
-app.get('/', function (req, res) {
-    res.send('ClonePS 200 Connection');
-});
+//app.get('/', function (req, res) {
+ //   res.send('ClonePS 200 Connection');
+//});
 
 // Endpoint GET untuk '/player/login/dashboard'
 app.get('/player/login/dashboard', (req, res) => {
@@ -75,7 +75,7 @@ app.get('/player/validate/close', function (req, res) {
     res.send('<script>window.close();</script>');
 });
 
-app.get('/hosts', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'hosts', 'preview.html'));  // Direct path to hosts/preview.html
 });
 
