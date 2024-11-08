@@ -72,9 +72,9 @@ app.get('/player/validate/close', function (req, res) {
     res.send('<script>window.close();</script>');
 });
 
-// Endpoint to serve 'hosts/preview.html' as '/hosts'
-app.get('/hosts', (req, res) => {
-    res.sendFile(path.join(__dirname, 'hosts', 'preview.html'));
+
+app.get('/monitor', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/html', 'monitor.html'));
 });
 
 // Start the server on port 5000
