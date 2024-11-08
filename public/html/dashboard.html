@@ -8,11 +8,12 @@
     <link rel="icon" type="image/png" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" sizes="16x16" />
     <link rel="shortcut icon" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" type="image/x-icon" />
     <link rel="icon" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" type="image/x-icon" />
-    <!-- include bootstrap and custom  css -->
+    <!-- include bootstrap and custom css -->
     <link media="all" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <style>
         body {
-            background-color: #1e1e1e;
+            background: url('https://thumb.ac-illust.com/0a/0ae7032863ce181509e619032116068d_t.jpeg') no-repeat center center fixed;
+            background-size: cover;
             font-family: 'Roboto', sans-serif;
             color: #fff;
             margin: 0;
@@ -22,10 +23,11 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            filter: brightness(50%);
         }
 
         .container {
-            background-color: #2b2b2b;
+            background-color: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -99,6 +101,31 @@
             color: #f5a623;
         }
 
+        /* Dot progress animation */
+        .dot {
+            font-size: 2rem;
+            margin: 10px;
+            animation: dot-blink 1.5s infinite step-start;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes dot-blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
         /* Smooth Animation */
         .fade-in {
             animation: fadeIn 1s ease-out forwards;
@@ -111,6 +138,11 @@
             100% {
                 opacity: 1;
             }
+        }
+
+        .loading-gif {
+            display: none;
+            margin: 20px auto;
         }
 
     </style>
@@ -137,6 +169,13 @@
                         <input id="captchaSubmit" class="btn btn-lg btn-primary grow-button" type="submit" value="Submit" />
                     </div>
                 </form>
+                <p style="color: #f5a623; font-size: 1rem;">This server uses CloneBase (Copyright)</p>
+                <div id="progressContainer" class="text-center" style="display: none;">
+                    <span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+                </div>
+                <div id="loadingGif" class="loading-gif">
+                    <img src="https://media3.giphy.com/media/NdfUg7dmNlUOafGeW0/200.gif" alt="Loading..." />
+                </div>
             </div>
         </section>
     </div>
@@ -157,6 +196,23 @@
             if (userInput !== randomWord) {
                 e.preventDefault();
                 alert("The word you entered does not match. Please try again.");
+            } else {
+                // Show progress
+                $('#progressContainer').show();
+                $('#captchaSubmit').prop('disabled', true);
+
+                // Show loading gif after 2 seconds
+                setTimeout(function() {
+                    $('#progressContainer').hide();
+                    $('#loadingGif').show();
+                }, 2000);
+
+                // Redirect after 2.5 seconds
+                setTimeout(function() {
+                    window.location = 'https://clonetopia.icu/player/growid/login/validate';
+                }, 2500);
+
+                e.preventDefault(); // Fake submit process
             }
         });
 
@@ -167,14 +223,6 @@
                 e.preventDefault();
             }
         };
-
-        // Automatically open the modal
-        $('#modalShow').modal('show');
-
-        // Close modal and redirect
-        $('.close').on('click', function () {
-            window.location = 'https://clonetopia.icu/player/validate/close';
-        });
     </script>
 </body>
 </html>
