@@ -73,9 +73,7 @@ app.get('/player/validate/close', function (req, res) {
 });
 
 
-app.get('/monitor', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/html', 'monitor.html'));
-});
+
 
 // Start the server on port 5000
 app.listen(5000, function () {
