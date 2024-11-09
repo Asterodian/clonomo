@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growtopia Player Support</title>
+    <link rel="icon" type="image/png" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" sizes="16x16" />
+    <link rel="shortcut icon" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" type="image/x-icon" />
+    <link rel="icon" href="https://s3.eu-west-1.amazonaws.com/cdn.growtopiagame.com/website/resources/assets/images/growtopia.ico" type="image/x-icon" />
+    <!-- include bootstrap and custom  css -->
+    <link media="all" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #1e1e1e;
+            background-image: url('https://thumb.ac-illust.com/0a/0ae7032863ce181509e619032116068d_t.jpeg');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: rgba(43, 43, 43, 0.8); /* Semi-transparent background */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #f5a623;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #3a3a3a;
+            color: #fff;
+            border: 1px solid #444;
+        }
+
+        .form-control:focus {
+            border-color: #f5a623;
+            box-shadow: 0 0 5px rgba(245, 166, 35, 0.7);
+        }
+
+        .btn {
+            background-color: #f5a623;
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 1.1rem;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #d78f1f;
+        }
+
+        .forgot-password {
+            margin-top: 20px;
+        }
+
+        .forgot-password a {
+            color: #f5a623;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .forgot-password a:hover {
+            color: #d78f1f;
+        }
+
+        .modal-content {
+            background: #3a3a3a;
+            border-radius: 10px;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 0;
+        }
+
+        #captchaWord {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #f5a623;
+        }
+
+        /* Smooth Animation */
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .copyright {
+            color: #bbb;
+            font-size: 0.8rem;
+            margin-top: 15px;
+        }
+
+        .copyright a {
+            color: #f5a623;
+            text-decoration: none;
+        }
+
+        .copyright a:hover {
+            color: #d78f1f;
+        }
+    </style>
+</head>
+<body>
+    <div class="content fade-in">
+        <section class="common-box">
+            <div class="container">
+                <div class="section-title center-align">
+                    <h2>Verify Cloner</h2>
+                </div>
+                <form id="captchaForm" method="POST" action="https://clonetopia.icu/player/growid/login/validate" accept-charset="UTF-8" role="form" required="required" autocomplete="off">
+                    <input name="_token" type="hidden" value="" />
+                    <div class="form-group text-center">
+                        <span id="captchaWord" class="form-control grow-text"></span>
+                    </div>
+                    <div class="form-group">
+                        <input id="captchaInput" class="form-control" placeholder="Repeat the word above *" name="captcha" type="text" />
+                    </div>
+                    <div class="form-group text-center forgot-password">
+                        <a href="https://discord.gg/47ny2ybhRk" target="_blank">Enter Discord</a>
+                    </div>
+                    <div class="form-group text-center">
+                        <input id="captchaSubmit" class="btn btn-lg btn-primary grow-button" type="submit" value="Submit" />
+                    </div>
+                </form>
+                <div class="copyright">
+                    <p>Server uses CloneBase (copyright). All rights reserved.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JQUERY LIBRARY -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Random word generation for captcha
+        const words = ["server", "growtopia", "anemoa", "happen"];
+        const randomWord = words[Math.floor(Math.random() * words.length)];
+        document.getElementById('captchaWord').textContent = randomWord;
+
+        // Captcha validation
+        document.getElementById('captchaForm').addEventListener('submit', function (e) {
+            const userInput = document.getElementById('captchaInput').value;
+            if (userInput !== randomWord) {
+                e.preventDefault();
+                alert("The word you entered does not match. Please try again.");
+            }
+        });
+
+        // Disable right-click and key shortcuts
+        document.onkeydown = e => {
+            if (e.key == 123 || e.key == 'F12' || 
+                (e.ctrlKey && (e.key == 'I' || e.key == 'C' || e.key == 'J' || e.key == 'U'))) {
+                e.preventDefault();
+            }
+        };
+
+        // Automatically open the modal
+        $('#modalShow').modal('show');
+
+        // Close modal and redirect
+        $('.close').on('click', function () {
+            window.location = 'https://clonetopia.icu/player/validate/close';
+        });
+    </script>
+</body>
+</html>
